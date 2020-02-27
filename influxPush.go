@@ -2,6 +2,7 @@ package influxpush
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -11,9 +12,10 @@ import (
 func Push(v uint) {
 	influx, err := influxdb.New("http://192.168.0.67:8086", "") //, influxdb.WithHTTPClient(myHTTPClient))
 	if err != nil {
+		log.Fatal("influxdb.New")
 		panic(err)
 	}
-
+	fmt.Printf("influx created")
 	myMetrics := []influxdb.Metric{
 		influxdb.NewRowMetric(
 			map[string]interface{}{"conso": v},
